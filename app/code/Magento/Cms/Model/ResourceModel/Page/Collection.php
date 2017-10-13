@@ -63,14 +63,15 @@ class Collection extends AbstractCollection
         $existingIdentifiers = [];
         foreach ($this as $item) {
             $identifier = $item->getData('identifier');
+            $name = $item->getData('title');
 
             $data['value'] = $identifier;
             $data['label'] = $item->getData('title');
 
-            if (in_array($identifier, $existingIdentifiers)) {
-                $data['value'] .= '|' . $item->getData('page_id');
+            if (in_array($name, $existingIdentifiers)) {
+                $data['label'] .= ' (ID: ' . $item->getData('page_id') . ')';
             } else {
-                $existingIdentifiers[] = $identifier;
+                $existingIdentifiers[] = $name;
             }
 
             $res[] = $data;
